@@ -12,7 +12,8 @@ app.use(bodyParser.urlencoded({extended:true}))
 // application/json 이렇게 된 데이터를 분석해서 가지고 온다.
 app.use(bodyParser.json())
 
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+
 mongoose.connect(config.mongoURI,{
   useNewUrlParser:true, useUnifiedTopology:true,useCreateIndex:true,useFindAndModify:false
 }).then(()=>console.log('연결됨'))
@@ -28,9 +29,7 @@ app.listen(port, () => {
 app.post('/register',(req,res)=>{
     // 회원 가입 할 때 필요한 정보들을 클라이언트에서 가지고 오면 
     // 그 데이터를 데이터 베이스에 넣어준다.
-     
-
-
+    
     const user = new User(req.body)
     user.save((err,userInfo)=>{
       if(err) return res.json({success:false, err})
